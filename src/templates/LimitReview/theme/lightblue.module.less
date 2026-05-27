@@ -1,0 +1,19 @@
+.limit-review-theme {
+  --bg-image: url('../assets/bg_lightblue.png');
+  --stat-text-color: #ffffff;
+  --stat-highlight-text-color: #fedc19;
+  --title-text-color: #ffffff;
+  --title-highlight-text-color: #fedc19;
+  --reason-bg-color: linear-gradient(180deg, #c1def3 0%, #c1def3 80%);
+  --reason-text-color: #175fa3;
+  --icon-color: #143d7b;
+  --annotation-text-color: #55504c;
+  --sign-text-color: #3d6199;
+  --watermark-image: url('@/assets/images/watermark-light.png');
+  --top-logo: url(../assets/logos/top-logo_lightblue.png);
+  --top-split: url(../assets/logos/top-split_lightblue.png);
+
+  &[is-long='true'] {
+    --watermark-image: url('../assets/watermark-light.png');
+  }
+}
