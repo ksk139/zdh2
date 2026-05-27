@@ -122,6 +122,10 @@ export async function getMultiLastSnapshot(
     })
 
     const result = await fetchResponse.json() as SnapshotResponse
+    console.log(
+  '真实行情返回:',
+  JSON.stringify(result, null, 2)
+)
 
     if (result.status_code !== 0) {
       console.warn(`市场 ${marketGroup.market} 请求失败:`, result.status_msg)
