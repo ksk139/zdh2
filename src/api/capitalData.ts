@@ -51,7 +51,7 @@ export interface ProcessedSnapshotData {
     [code: string]: {
       67?: number   // 沉淀资金
       68?: number   // 资金流向
-      199112?: number // 涨幅
+      199112?: number // 涨幅 (处理后为标准小数，如 0.0082 代表 0.82%)
     }
   }
 }
@@ -110,7 +110,7 @@ export async function getMultiLastSnapshot(
       data_fields: [68, 67, 199112]
     }
 
-    console.log(`市场 ${marketGroup.market} 请求参数:`, JSON.stringify(requestBody))
+  console.log(`市场 ${marketGroup.market} 请求参数:`, JSON.stringify(requestBody))
 
     const fetchResponse = await fetch(SNAPSHOT_URL, {
       method: 'POST',
@@ -156,7 +156,8 @@ export async function getMultiLastSnapshot(
           } else if (fieldNum === 68) {
             codeData[68] = values[index]  // 资金流向
           } else if (fieldNum === 199112) {
-            codeData[199112] = values[index]  // 涨幅
+            // 【核心修复】将接口返回的百分比数值统一除以 100，规避下游可视化组件二次渲染放大
+            codeData[199112] = values[index] !== undefined ? values[index] / 100 : undefined
           }
         })
 
